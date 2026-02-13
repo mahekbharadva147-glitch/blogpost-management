@@ -3,7 +3,6 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -11,15 +10,18 @@ import AuthGuard from "./auth/AuthGuard";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import CreatePost from "./pages/CreatePost"; // ✅ ADD THIS
 
 const DefaultRoute = () => {
   const loginData = JSON.parse(localStorage.getItem("loginData"));
 
+  // ✅ If logged in → Dashboard
   if (loginData) {
     return <Navigate to="/Dashboard" replace />;
   }
 
-  return <Navigate to="/Login" replace />;
+  // ✅ If not logged in → Register
+  return <Navigate to="/Register" replace />;
 };
 
 function App() {
@@ -52,12 +54,27 @@ function App() {
         </AuthGuard>
       ),
     },
+
+    // ✅ NEW ROUTE ADDED
+    {
+      path: "/create-post",
+      element: (
+        <AuthGuard required={true}>
+          <CreatePost />
+        </AuthGuard>
+      ),
+    },
   ]);
 
   return (
     <>
       <RouterProvider router={router} />
-      <ToastContainer />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        theme="light"
+      />
     </>
   );
 }
