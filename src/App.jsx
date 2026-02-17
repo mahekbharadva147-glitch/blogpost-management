@@ -7,21 +7,20 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import AuthGuard from "./auth/AuthGuard";
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import CreatePost from "./pages/CreatePost"; // ✅ ADD THIS
+import Dashboard from "./Pages/Dashboard";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import CreatePost from "./Pages/CreatePost";
+import PostDetails from "./pages/PostDetails";
+import Analytics from "./pages/Analytics";
+
 
 const DefaultRoute = () => {
   const loginData = JSON.parse(localStorage.getItem("loginData"));
-
-  // ✅ If logged in → Dashboard
   if (loginData) {
-    return <Navigate to="/Dashboard" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
-
-  // ✅ If not logged in → Register
-  return <Navigate to="/Register" replace />;
+  return <Navigate to="/register" replace />;
 };
 
 function App() {
@@ -31,36 +30,53 @@ function App() {
       element: <DefaultRoute />,
     },
     {
-      path: "/Login",
-      element: (
-        <AuthGuard required={false}>
-          <Login />
-        </AuthGuard>
-      ),
-    },
+    path: "/login",
+    element: <Login />,
+  },
+  
     {
-      path: "/Register",
-      element: (
-        <AuthGuard required={false}>
-          <Register />
-        </AuthGuard>
-      ),
-    },
+    path: "/register",
+    element: <Register />,
+  },
+
     {
-      path: "/Dashboard",
+      path: "/dashboard",
       element: (
         <AuthGuard required={true}>
           <Dashboard />
         </AuthGuard>
       ),
     },
-
-    // ✅ NEW ROUTE ADDED
+    
     {
       path: "/create-post",
       element: (
         <AuthGuard required={true}>
           <CreatePost />
+        </AuthGuard>
+      ),
+    },
+    {
+      path:"/post/:id",
+      element:(
+        <AuthGuard required ={true}>
+          <PostDetails/>
+        </AuthGuard>
+      ),
+    },
+    {
+  path: "/post/",
+  element: (
+    <AuthGuard required={true}>
+      <PostDetails />
+    </AuthGuard>
+  ),
+},
+{
+      path: "/analytics",
+      element: (
+        <AuthGuard required={true}>
+          <Analytics />
         </AuthGuard>
       ),
     },
@@ -70,9 +86,17 @@ function App() {
     <>
       <RouterProvider router={router} />
 
+      {/* Toast container added ONCE */}
       <ToastContainer
         position="top-right"
         autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
         theme="light"
       />
     </>

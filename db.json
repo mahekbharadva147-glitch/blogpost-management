@@ -1,15 +1,15 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "title": "First Post",
       "description": "Sample description",
       "image": "https://picsum.photos/400",
       "author": "Admin",
       "date": "Recent"
     },
-     {
-      "id": 1,
+    {
+      "id": "1",
       "title": "Second Post",
       "description": "Sample description",
       "image": "https://picsum.photos/400",
@@ -17,7 +17,7 @@
       "date": "Recent"
     },
     {
-      "id": 1,
+      "id": "1",
       "title": "Third Post",
       "description": "Sample description",
       "image": "https://picsum.photos/400",
@@ -25,12 +25,23 @@
       "date": "Recent"
     },
     {
-      "id": 1,
+      "id": "1",
       "title": "fourth Post",
       "description": "Sample description",
       "image": "https://picsum.photos/400",
       "author": "user",
       "date": "Recent"
+    },
+    {
+      "id": "1771217317495",
+      "title": "mahiii",
+      "author": "mahekbharadva147",
+      "description": "hello",
+      "image": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=500",
+      "userId": 1771217317446,
+      "userEmail": "mahekbharadva147@gmail.com",
+      "createdAt": "2026-02-16T04:48:37.446Z",
+      "date": "Feb 16, 2026"
     }
   ]
 }

@@ -1,5 +1,5 @@
-import { FaBlog, FaHome, FaPlusSquare, FaSignOutAlt } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { FaBlog, FaHome, FaPlusSquare, FaSignOutAlt,FaChartBar } from "react-icons/fa";
+import { Navigate, NavLink } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ onLogout }) => {
@@ -23,6 +23,11 @@ const Navbar = ({ onLogout }) => {
           <NavLink to="/create-post" className="nav-item">
             <FaPlusSquare className="nav-icon" /> Create Post
           </NavLink>
+           <NavLink to="/analytics" className="nav-item" onClick={()=>Navigate("/analytics")}>
+            <FaChartBar className="nav-icon" /> Analytics
+          </NavLink>
+
+          
         </div>
 
         <div className="navbar-actions">
