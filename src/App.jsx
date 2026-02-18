@@ -5,14 +5,15 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+                 
 import AuthGuard from "./auth/AuthGuard";
 import Dashboard from "./Pages/Dashboard";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import CreatePost from "./Pages/CreatePost";
+import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import Analytics from "./pages/Analytics";
+import ThemeContext from "./context/ThemeContext";
 
 
 const DefaultRoute = () => {
@@ -77,6 +78,14 @@ function App() {
       element: (
         <AuthGuard required={true}>
           <Analytics />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: "/themecontext",
+      element: (
+        <AuthGuard required={true}>
+          <ThemeContext/>
         </AuthGuard>
       ),
     },
