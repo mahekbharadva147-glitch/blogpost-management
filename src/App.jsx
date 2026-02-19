@@ -7,13 +7,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
                  
 import AuthGuard from "./auth/AuthGuard";
-import Dashboard from "./Pages/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import Analytics from "./pages/Analytics";
 import ThemeContext from "./context/ThemeContext";
+import Favorites from "./pages/Favorites";
 
 
 const DefaultRoute = () => {
@@ -58,7 +59,7 @@ function App() {
       ),
     },
     {
-      path:"/post/:id",
+      path:"/create-post/:id",
       element:(
         <AuthGuard required ={true}>
           <PostDetails/>
@@ -86,6 +87,14 @@ function App() {
       element: (
         <AuthGuard required={true}>
           <ThemeContext/>
+        </AuthGuard>
+      ),
+    },
+    {
+      path: "/favorites",
+      element: (
+        <AuthGuard required={true}>
+          <Favorites/>
         </AuthGuard>
       ),
     },
