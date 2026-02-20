@@ -5,17 +5,15 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-                 
+
 import AuthGuard from "./auth/AuthGuard";
 import Dashboard from "./pages/Dashboard";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
-import Analytics from "./pages/Analytics";
-import ThemeContext from "./context/ThemeContext";
+import Analytics from "./Pages/Analytics";
 import Favorites from "./pages/Favorites";
-
 
 const DefaultRoute = () => {
   const loginData = JSON.parse(localStorage.getItem("loginData"));
@@ -32,15 +30,21 @@ function App() {
       element: <DefaultRoute />,
     },
     {
-    path: "/login",
-    element: <Login />,
-  },
-  
+      path: "/login",
+      element: (
+        <AuthGuard required={false}>
+          <Login />
+        </AuthGuard>
+      ),
+    },
     {
-    path: "/register",
-    element: <Register />,
-  },
-
+      path: "/register",
+      element: (
+        <AuthGuard required={false}>
+          <Register />
+        </AuthGuard>
+      ),
+    },
     {
       path: "/dashboard",
       element: (
@@ -49,7 +53,6 @@ function App() {
         </AuthGuard>
       ),
     },
-    
     {
       path: "/create-post",
       element: (
@@ -59,44 +62,36 @@ function App() {
       ),
     },
     {
-      path:"/create-post/:id",
+      path: "/create-post/:id",
+      element: (
+        <AuthGuard required={true}>
+          <CreatePost />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: "PostDetails/:id",
       element:(
-        <AuthGuard required ={true}>
+        <AuthGuard required={true}>
           <PostDetails/>
         </AuthGuard>
-      ),
+      )
     },
     {
-  path: "/post/",
-  element: (
-    <AuthGuard required={true}>
-      <PostDetails />
-    </AuthGuard>
-  ),
-},
-{
-      path: "/analytics",
-      element: (
+      path: "Analytics",
+      element:(
         <AuthGuard required={true}>
-          <Analytics />
+          <Analytics/>
         </AuthGuard>
-      ),
+      )
     },
     {
-      path: "/themecontext",
-      element: (
-        <AuthGuard required={true}>
-          <ThemeContext/>
-        </AuthGuard>
-      ),
-    },
-    {
-      path: "/favorites",
-      element: (
+      path: "favorites",
+      element:(
         <AuthGuard required={true}>
           <Favorites/>
         </AuthGuard>
-      ),
+      )
     },
   ]);
 
@@ -104,7 +99,7 @@ function App() {
     <>
       <RouterProvider router={router} />
 
-      {/* Toast container added ONCE */}
+      {/*  Toast container added ONCE */}
       <ToastContainer
         position="top-right"
         autoClose={1000}
@@ -121,4 +116,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
